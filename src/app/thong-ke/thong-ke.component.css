@@ -1,0 +1,35 @@
+
+.container{
+  width: 80%;
+  margin: auto;
+}
+.today-area{
+  width: 80%;
+  margin: auto;
+}
+.search{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+.doanh-thu{
+  max-height: 50vw;
+  overflow: auto;
+}
+.header-conatiner{
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.container-top{
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+.container-1{
+  width: 45%;
+  height: 20rem;
+}

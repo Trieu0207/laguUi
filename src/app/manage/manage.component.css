@@ -1,0 +1,20 @@
+.container{
+  margin-left: 1rem;
+}
+.head-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+.selected{
+  width: 50%;
+  margin-right: 2rem;
+}
+.body-container{
+  width: 90%;
+}
+.value{
+  margin-right: 1rem;
+}
+.form-update{
+  width: 50%;
+}

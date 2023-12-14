@@ -1,0 +1,54 @@
+<br>
+<div class="container">
+  <div class="login-form">
+    <h1>Đăng nhập</h1>
+    <form enctype="multipart/form-data">
+      <div class="mb-3 mt-3">
+        <label for="username" class="form-label">Tên tài khoản:</label>
+        <input type="username" class="form-control" id="username" placeholder="Nhập tên tài khoản" name="username" [(ngModel)] ='this.username'>
+      </div>
+      <div class="mb-3">
+        <label for="pwd" class="form-label">Mật Khẩu:</label>
+        <input type="password" class="form-control" id="pwd" placeholder="Nhập password" name="pswd" [(ngModel)] ='this.password'>
+      </div>
+      <button type="submit" style="margin-right: 1rem;" class="btn btn-success" (click)="simpleLogin()">Đăng nhập</button>
+      <button type="submit" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#demo">Đăng kí</button>
+    </form>
+    <br>
+    <div class="image">
+      <img class="img" src="https://i.pinimg.com/originals/93/0d/d1/930dd12628c6749beb26c04d7f55e1e6.gif" alt="img">
+    </div>
+  </div>
+  <div class="logout-form collapse" id="demo">
+    <h1>Đăng kí</h1>
+    <form enctype="multipart/form-data">
+      <div class="mb-3 mt-3">
+        <label for="firstname" class="form-label">firstname:</label>
+        <input type="username" class="form-control" id="firstname" placeholder="Nhập first name" name="firstname" [(ngModel)] ='this.firstname'>
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="lastname" class="form-label">lastname:</label>
+        <input type="lastname" class="form-control" id="lastname" placeholder="Nhập last name" name="lastname" [(ngModel)] ='this.lastname'>
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="email" class="form-label">email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Nhập email" name="email" [(ngModel)] ='this.email'>
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="newusername" class="form-label">Tên tài khoản:</label>
+        <input type="username" class="form-control" id="unewusernamesername" placeholder="Nhập tên tài khoản" name="newusername" [(ngModel)] ='this.newusername'>
+      </div>
+      <div class="mb-3">
+        <label for="newpwd" class="form-label">Mật Khẩu:</label>
+        <input type="password" class="form-control" id="newpwd" placeholder="Nhập password" name="newpwd" [(ngModel)] ='this.newpassword'>
+      </div>
+      <div class="mb-3">
+        <label for="Repwd" class="form-label"  >Mật lại Khẩu: <span *ngIf="this.checkpass === false" style="color: red;">*không trùng mật khẩu</span></label>
+        <input type="password" class="form-control" id="Repwd" (input)="onchange($event)" placeholder="Nhập lại password" name="Repwd" [(ngModel)] ='this.Repwd'>
+      </div>
+      <button type="submit" class="btn btn-primary"  [disabled]="checkpass === false" (click)="register()">Đăng kí</button>
+      <button type="submit" style="margin-left: 1rem;" class="btn btn-danger" data-bs-toggle="collapse" data-bs-target="#demo" (click)="cancel()">Thoát</button>
+
+    </form>
+  </div>
+</div>

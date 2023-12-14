@@ -1,0 +1,23 @@
+.container{
+  display: flex;
+}
+.login-form{
+  margin-left: 2rem;
+  height: auto;
+  width: 40%;
+  padding: 1rem;
+  border: 0.1rem solid black;
+  border-radius: 1rem;
+}
+.logout-form{
+  margin-left: 2rem;
+  margin-top: 2rem;
+  width: 40%;
+  padding: 1rem;
+  border: 0.1rem solid black;
+  border-radius: 1rem;
+}
+.img{
+  border-radius: 2rem;
+  width: 100%;
+}

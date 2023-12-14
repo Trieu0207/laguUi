@@ -1,0 +1,50 @@
+<br>
+<div class="container">
+  <div class="form-update">
+    <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#demo">Cập nhật giá trị</button>
+    <div id="demo" class="collapse ">
+      <br>
+      <form enctype="multipart/form-data">
+        <div class="mb-3 mt-3">
+          <label for="select" class="form-label">Nhập tên Role</label>
+          <select class="form-select" id="select" aria-label="Default select example" name="roleId"  [(ngModel)]="this.roleId">
+            <option selected value="0">Role name</option>
+            <option *ngFor="let item of this.dsRole" value="{{item.id}}">{{item.name}}</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="value" class="form-label">Nhập giá trị</label>
+          <input type="number" id="value" class="form-control" name="roleValue" [(ngModel)]="this.roleValue">
+        </div>
+        <div class="btn-area">
+          <input type="submit" (click)="submit()" style="margin-right: 1rem;" class="btn btn-success" >
+          <button class="btn btn-danger"  data-bs-toggle="collapse" data-bs-target="#demo">Hủy</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <br>
+  <div class="body-container">
+    <table class="table table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Value</th>
+          <th>Unit</th>
+          <th>Describe</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of this.dsRole">
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.value}}</td>
+          <td>{{item.unit}}</td>
+          <td>{{item.describe}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

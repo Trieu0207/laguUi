@@ -1,0 +1,54 @@
+.container{
+  margin: 3rem;
+}
+.container-1{
+  display: flex;
+  flex-wrap: wrap;
+}
+.img1{
+  margin-left: 0.5rem;
+  margin-right: 1rem;
+}
+.image{
+  width: 25rem;
+  height: 25rem;
+  border-radius: 50%;
+
+}
+.container-2{
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.contact{
+  padding: 1rem;
+
+}
+.email{
+  text-decoration: none;
+  color:black
+}
+.email:hover{
+  color: blue ;
+  text-decoration:underline;
+}
+.image{
+  transition: transform 0.3s ease-in-out;
+}
+.contact:hover .image{
+  transform: scale(1.2);
+}
+.contact a{
+  text-decoration: none;
+  color: black;
+}
+.contact a img{
+  max-width: 3rem;
+  max-height: 3rem;
+  text-decoration: none;
+}
+
+.contact a p{
+  text-decoration: none;
+  color: black;
+}

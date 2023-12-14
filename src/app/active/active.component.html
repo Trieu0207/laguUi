@@ -1,0 +1,33 @@
+<br>
+<div class="container">
+  <div class="header-container">
+    <h2>Lịch sử hoạt động {{this.today()}}</h2>
+    <div class="input-group mb-3 SearchDate">
+      <input type="datetime-local" class="form-control" placeholder="Search" [(ngModel)] = "this.date">
+      <button class="btn btn-primary" (click)="search()" type="submit">Search</button>
+    </div>
+  </div>
+  <div>
+    <table class="table table-hover ">
+      <thead class="table-dark">
+        <tr>
+          <th>STT</th>
+          <th>Thời gian</th>
+          <th>Hoạt động</th>
+          <th>Trạng thái</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of history_active">
+          <td>{{item.stt}}</td>
+          <td>{{this.format_time(item.time)}}</td>
+          <td>{{item.actived}}</td>
+          <td>
+            <p class="text-success" *ngIf="item.status === 'success' " >{{item.status}}</p>
+            <p class="text-danger" *ngIf="item.status !== 'success' " >{{item.status}}</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

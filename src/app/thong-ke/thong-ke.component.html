@@ -1,0 +1,314 @@
+<br>
+<div class="today-area">
+  <div>
+    <div class="btn-group btn-group-lg">
+      <button type="button" (click)="loadDoanhThuToday()" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#doanhThu">Doanh số</button>
+      <button type="button" (click)="thongKeMonAnToday()" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#menu">Thống kê menu</button>
+      <button type="button" (click)="loadDatBan()" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#datBan">Thống kê Đặt bàn</button>
+    </div>
+  </div>
+  <br>
+  <div id="datBan" class="datBan collapse">
+    <h1 style="font-weight: bold;">
+      Thống kê Đặt Bàn
+    </h1>
+    <div class="search">
+      <div>
+        <input type="datetime-local" class="form-control" id="start_time" name="start_time" [(ngModel)] = "this.time_chose_3">
+      </div>
+      <button class="btn btn-primary" (click)="thongKeDatBanTheoNgay(this.time_chose_3)">Duyệt</button>
+      <button class="btn btn-warning" (click)="clearChose3()">Clear</button>
+    </div>
+    <br>
+    <table class="table  table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Doanh Thu trong ngày</th>
+          <th>
+            <span *ngIf="this.time_chose_2 !== undefined">{{formattedDate(this.time_chose_1)}}</span>
+            <span *ngIf="this.time_chose_2 === undefined || this.time_chose_1 === ''">{{formattedDate(this.current_time)}}</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Trạng thái</td>
+          <td>Số lượng</td>
+        </tr>
+        <tr *ngFor="let item of this.thongKeDatBanToday">
+          <td>{{item.trang_thai}}</td>
+          <td>{{item.so_luong}}</td>
+        </tr>
+        <tr>
+        </tr>
+      </tbody>
+    </table>
+    <div class="search">
+      <div>
+        <input type="datetime-local" class="form-control" id="start_time" name="start_time" [(ngModel)] = "this.timer_3.start_time" >
+      </div>
+      <div>
+        đến
+      </div>
+      <div>
+        <input type="datetime-local" class="form-control" id="end_time" name="end_time" [(ngModel)] = "this.timer_3.end_time">
+      </div>
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary" (click)="thongKeDatBanTheoTime(timer_3)">Duyệt</button>
+        <button type="button" class="btn btn-warning" (click)="clearTimer3()">clear</button>
+        <button type="button" class="btn btn-success" (click)="exportToExcel(this.thongKeDatBanTime)">Xuất file Excel</button>
+        <button type="button" class="btn btn-danger" (click)="clearTimer3()" data-bs-toggle="collapse" data-bs-target="#datBan">Hủy</button>
+      </div>
+    </div>
+    <br>
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>ngày</th>
+          <th>Đã thanh toán</th>
+          <th>Hoàn cọc</th>
+          <th>Hủy cọc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of thongKeDatBanTime">
+          <td>{{item.ngay}}</td>
+          <td>{{[item['da thanh toan']]}}</td>
+          <td>{{[item['hoan coc']]}}</td>
+          <td>{{[item['huy coc']]}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+ <div id="doanhThu" class="doanh-thu collapse">
+  <h1 style="font-weight: bold;">
+    Thống Kê Doanh Thu
+  </h1>
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th>
+          <div class="search">
+            <div>
+              <input type="datetime-local" class="form-control" id="start_time" name="start_time" [(ngModel)] = "this.time_chose_1">
+            </div>
+            <button class="btn btn-primary" (click)="thongKeDoanhThuTheoNgay()">Duyệt</button>
+            <button class="btn btn-warning" (click)="clearChose1()">Clear</button>
+          </div>
+        </th>
+      </tr>
+      <tr>
+        <th>Doanh Thu trong ngày:
+          <span *ngIf="this.time_chose_1 !== undefined">{{formattedDate(this.time_chose_1)}}</span>
+          <span *ngIf="this.time_chose_1 === undefined || this.time_chose_1 === ''">{{formattedDate(this.current_time)}}</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>Tổng Doanh số: </th>
+        <td>{{this.doanhThuToday.total_tong_tien | currency:'VND':'symbol':'1.0-0'}}</td>
+      </tr>
+      <tr>
+        <th>Tổng số lượng: </th>
+        <td>{{this.doanhThuToday.total_so_luong}}</td>
+      </tr>
+    </tbody>
+    <div class="search">
+      <div>
+        <input type="datetime-local" class="form-control" id="start_time" name="start_time" [(ngModel)] = "this.timer_1.start_time">
+      </div>
+      <div>
+        đến
+      </div>
+      <div>
+        <input type="datetime-local" class="form-control" id="end_time" name="end_time" [(ngModel)] = "this.timer_1.end_time">
+      </div>
+      <button class="btn btn-primary" (click)="thongKeTheoThoiGian(timer_1)">Duyệt</button>
+      <button class="btn btn-warning" (click)="clearTimer1()">Clear</button>
+      <button class="btn btn-danger"  (click)="clearTimer1()" data-bs-toggle="collapse" data-bs-target="#doanhThu" >Hủy</button>
+      <button class="btn btn-success" (click)="exportToExcel(this.thongKeDoanhTime)">Xuất file Excel</button>
+    </div>
+    <br>
+    <tbody>
+      <tr>
+        <th>Ngày</th>
+        <th>Tổng số lượng</th>
+        <th>Tổng Doanh số</th>
+      </tr>
+      <tr *ngFor="let item of this.thongKeDoanhTime">
+        <td>
+          <p *ngIf="this.doanhThuToday.ngay !== ''">{{item.ngay}}</p>
+          <p *ngIf="this.doanhThuToday.ngay === ''">{{item.formattedDate}}</p>
+        </td>
+        <td>{{item.total_so_luong}}</td>
+        <td>{{item.total_tong_tien | currency:'VND':'symbol':'1.0-0'}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+ </div>
+
+  <div id="menu" class="menu collapse">
+    <h1 style="font-weight: bold;">
+      Thống Kê Menu
+    </h1>
+    <div class="search">
+      <div>
+        <input type="datetime-local" class="form-control" id="start_time" name="start_time" [(ngModel)] = "this.time_chose_2">
+      </div>
+      <button class="btn btn-primary" (click)="thongKeMonAnTheoNgay()">Duyệt</button>
+      <button class="btn btn-warning" (click)="clearChose2()">Clear</button>
+      <button class="btn btn-success" (click)="exportToExcel(this.thongKeMonToday)">Xuất file excel</button>
+      <div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="margin-left: 0.5rem;">
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked (click)="all()">
+        <label class="btn btn-outline-primary" for="btnradio1" >Tất cả</label>
+
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" (click)="mon_an()">
+        <label class="btn btn-outline-primary" for="btnradio2">Món ăn</label>
+
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" (click)="thuc_uong()">
+        <label class="btn btn-outline-primary" for="btnradio3">Thức uống</label>
+
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" (click)="trang_mieng()">
+        <label class="btn btn-outline-primary" for="btnradio4">Tráng miệng</label>
+      </div>
+
+    </div>
+    <br>
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Doanh Thu trong ngày </th>
+          <th>
+            <span *ngIf="this.time_chose_2 !== undefined">{{formattedDate(this.time_chose_2)}}</span>
+            <span *ngIf="this.time_chose_2 === undefined || this.time_chose_2 === ''">{{formattedDate(this.current_time)}}</span>
+          </th>
+        </tr>
+        <tr>
+          <th>Tên món</th>
+          <th>Tổng số lượng</th>
+          <th>Doanh số:</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of this.thongKeMonToday">
+          <td>{{item.menu__ten_san_pham}}</td>
+          <td>{{item.tong_so_luong}}</td>
+          <td>{{item.tong_tien | currency:'VND':'symbol':'1.0-0'}}</td>
+        </tr>
+      </tbody>
+     </table>
+    <div class="search">
+      <div>
+        <input type="datetime-local" class="form-control" id="start_time" name="start_time" [(ngModel)] = "this.timer_2.start_time" >
+      </div>
+      <div>
+        đến
+      </div>
+      <div>
+        <input type="datetime-local" class="form-control" id="end_time" name="end_time" [(ngModel)] = "this.timer_2.end_time">
+      </div>
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary" (click)="thongKeMonAnTheoThoiGian(timer_2)">Duyệt</button>
+        <button type="button" class="btn btn-warning" (click)="clearTimer2()">clear</button>
+        <button type="button" class="btn btn-success" (click)="exportToExcel(this.thongKeMonTheoTime)">Xuất file Excel</button>
+        <button type="button" class="btn btn-danger" (click)="clearTimer2()" data-bs-toggle="collapse" data-bs-target="#menu">Hủy</button>
+      </div>
+      <div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="margin-left: 0.5rem;">
+        <input type="radio" class="btn-check" name="btnradioa" id="btnradio5" autocomplete="off" checked (click)="all_2()">
+        <label class="btn btn-outline-primary" for="btnradio5" >Tất cả</label>
+
+        <input type="radio" class="btn-check" name="btnradioa" id="btnradio6" autocomplete="off" (click)="mon_an_2()">
+        <label class="btn btn-outline-primary" for="btnradio6">Món ăn</label>
+
+        <input type="radio" class="btn-check" name="btnradioa" id="btnradio7" autocomplete="off" (click)="thuc_uong_2()">
+        <label class="btn btn-outline-primary" for="btnradio7">Thức uống</label>
+
+        <input type="radio" class="btn-check" name="btnradioa" id="btnradio8" autocomplete="off" (click)="trang_mieng_2()">
+        <label class="btn btn-outline-primary" for="btnradio8">Tráng miệng</label>
+      </div>
+    </div>
+    <br>
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Tên món</th>
+          <th>Tổng số lượng</th>
+          <th>Doanh số:</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of this.thongKeMonTheoTime">
+          <td>{{item.menu__ten_san_pham}}</td>
+          <td>{{item.tong_so_luong}}</td>
+          <td>{{item.doanh_thu | currency:'VND':'symbol':'1.0-0'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<br>
+<hr>
+<h1 style="text-align: center;">
+  Doanh thu trong năm nay
+</h1>
+<br>
+<div class="filter">
+  <div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="margin-left: 0.5rem;">
+     <input type="radio" class="btn-check" name="btnradioFilter" id="btnradioFilter1" checked autocomplete="off">
+     <label class="btn btn-outline-primary" for="btnradioFilter1" (click)="thongKeDanhThuThang()">Tháng</label>
+     <input type="radio" class="btn-check" name="btnradioFilter"  (click)="thongKeDanhThuQuy()" id="btnradioFilter2" autocomplete="off">
+     <label class="btn btn-outline-primary" for="btnradioFilter2">Quý</label>
+   </div>
+ </div>
+ <br>
+<div class="container-top">
+  <div class="container-1">
+    <div style="display: block;">
+      <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+        [type]="'bar'"></canvas>
+    </div>
+  </div>
+  <div class="container-1">
+    <canvas baseChart [datasets]="barChartData2" [labels]="barChartLabels2" [options]="barChartOptions" [legend]="barChartLegend"
+        [type]="'line'"></canvas>
+  </div>
+  </div>
+  <h1 style="text-align: center;">Thống Kê Mặt Hàng</h1>
+  <br>
+  <div class="container-top">
+    <div class="container-1">
+      <canvas baseChart [datasets]="pieChartData" [labels]="pieChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+          [type]="'pie'"></canvas>
+    </div>
+    <div class="container-1">
+      <canvas baseChart [datasets]="barChartData3" [labels]="barChartLabels3" [options]="barChartOptions" [legend]="barChartLegend"
+          [type]="'bar'"></canvas>
+    </div>
+  </div>
+<div class="container">
+
+  <br>
+  <table class="table table-hover table-bordered ">
+    <thead>
+      <tr>
+        <th>Thống kê doanh thu theo năm </th>
+        <th><button style="margin-left: 1rem;" class="btn btn-success" (click)="exportToExcel(this.thongKeDoanhThu)">Xuất file Excel</button></th>
+      </tr>
+      <tr>
+        <th>tháng</th>
+        <th>Số lượng Bill</th>
+        <th>Doanh thu</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of this.thongKeDoanhThu">
+        <td>{{item.thang}}</td>
+        <td>{{item.so_luong}}</td>
+        <td>{{item.doanh_thu | currency:'VND':'symbol':'1.0-0'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,11 @@
+.container{
+  width: 85%;
+  margin: auto;
+}
+.header-container{
+  display: flex;
+}
+.SearchDate{
+  margin-left: 2rem;
+  width: 30%;
+}
